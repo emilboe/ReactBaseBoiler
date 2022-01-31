@@ -34,22 +34,20 @@ export default function ForgotPW() {
             <form onSubmit={handleSubmit}>
 
                 <div>{currentUser && "You're currently logged in with : " + currentUser.email}</div>
-                <br/>
+                <br />
                 <div>
                     <label>Email</label><br />
                     <input type="email" ref={emailRef} required />
                 </div>
                 <br />
-                <button disabled={loading} type="submit">Reset Password</button>
+                <button className="purp" disabled={loading} type="submit">Reset Password</button>
                 <div>{error ? error : ''}</div>
             </form>
             {message}
             <br />
             <div>
-                <Link to='/login'>Login</Link>
+                <Link to='/login'><button className="green">Login</button></Link>
             </div>
-            <br />
-            <div>Don't have an account? <Link to="/signup">Sign up</Link></div>
         </>
     )
 }
