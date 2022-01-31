@@ -5,13 +5,13 @@ import { getAuth } from 'firebase/auth'
 
 export default function PrivateRoute({ children }) {
     const authed = getAuth() // getAuth() returns true or false based on localStorage
-    console.log(authed.currentUser)
+    // console.log(authed.currentUser)
 
     if (authed.currentUser === null || authed.currentUser === undefined) {
         console.log('fucked')
         return <Navigate to='/login' />
     } else {
-        console.log('apparently not fucked')
+        // console.log('apparently not fucked')
         return children
     }
 

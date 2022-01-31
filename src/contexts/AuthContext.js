@@ -86,12 +86,52 @@ export function AuthProvider({ children }) {
     }
   }
 
+  async function updateEmail(email) {
+
+    try {
+      const res = await currentUser.updateEmail(email)
+      console.log('res: ', res)
+      return {
+        error: false,
+        message: res
+      }
+    }
+    catch (err) {
+      return {
+        error: true,
+        message: err
+      }
+    }
+
+  }
+
+  function updatePassword(password) {
+
+    try {
+      const res = currentUser.updatePassword(password)
+      console.log('res: ', res)
+      return {
+        error: false,
+        message: res
+      }
+    }
+    catch (err) {
+      console.log('err: ', err)
+      return {
+        error: true,
+        message: err
+      }
+    }
+  }
+
   const value = {
     currentUser,
     login,
     signup,
     logout,
-    resetPassword
+    resetPassword,
+    updateEmail,
+    updatePassword
   }
   return (
     <AuthContext.Provider value={value}>
