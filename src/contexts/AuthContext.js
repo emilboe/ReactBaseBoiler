@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function logout(){
+  function logout() {
     return auth.signOut()
   }
 
@@ -68,11 +68,30 @@ export function AuthProvider({ children }) {
     return unsubscribe
 
   }
+
+  async function resetPassword(email) {
+
+    try {
+      const res = await auth.sendPasswordResetEmail(email)
+      return {
+        error: false,
+        message: res
+      }
+    }
+    catch (err) {
+      return {
+        error: true,
+        message: err
+      }
+    }
+  }
+
   const value = {
     currentUser,
     login,
     signup,
-    logout
+    logout,
+    resetPassword
   }
   return (
     <AuthContext.Provider value={value}>
