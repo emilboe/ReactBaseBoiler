@@ -109,14 +109,12 @@ export function AuthProvider({ children }) {
 
     try {
       const res = currentUser.updatePassword(password)
-      console.log('res: ', res)
       return {
         error: false,
         message: res
       }
     }
     catch (err) {
-      console.log('err: ', err)
       return {
         error: true,
         message: err

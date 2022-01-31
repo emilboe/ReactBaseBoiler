@@ -30,10 +30,8 @@ export default function UpdateProfile() {
         setMessage("")
 
         if (emailRef.current.value !== currentUser.email) {
-            console.log('email value:', emailRef.current.value)
             promises.push(updateEmail(emailRef.current.value))
         } else if (passwordRef.current.value) {
-            console.log('pw value:', passwordRef.current.value)
             promises.push(updatePassword(passwordRef.current.value))
         } else {
             setLoading(false)
@@ -42,7 +40,7 @@ export default function UpdateProfile() {
         }
 
         Promise.all(promises).then((res) => {
-            // console.log(e[0].message.message)
+
             if (res[0].error) {
                 console.log(res[0].message.message)
                 setError(res[0].message.message.substring(10).replace('auth/', '').replace(/-/g, ' '))
@@ -51,13 +49,7 @@ export default function UpdateProfile() {
             }
             setLoading(false)
 
-            // navigate('/')
         })
-        // .catch(() => {
-        //     setError('Failed to update account')
-        // }).finally(() => {
-        //     setLoading(false)
-        // })
     }
 
     return (

@@ -21,10 +21,10 @@ export default function Signup() {
         setError('')
         setLoading(true)
         const res = await signup(emailRef.current.value, passwordRef.current.value)
+        
         // Not a great way to handle error codes, but fine for now.
         setLoading(false)
         if (res.error) {
-            console.log(res)
             setError(res.message.message.substring(10).replace('auth/', '').replace(/-/g, ' '))
         }
         else {

@@ -1,14 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ForgotPW() {
     const emailRef = useRef()
-    const { login, currentUser, resetPassword } = useAuth()
+    const {  currentUser, resetPassword } = useAuth()
     const [error, setError] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -17,9 +16,9 @@ export default function ForgotPW() {
         setLoading(true)
 
         const res = await resetPassword(emailRef.current.value)
+
         // Not a great way to handle error codes, but fine for now.
         if (res.error) {
-            console.log('res :', res)
             setError(res.message.message.substring(10).replace('auth/', '').replace(/-/g, ' '))
         } else {
             setMessage('check your inbox!')

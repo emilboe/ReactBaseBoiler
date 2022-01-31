@@ -15,8 +15,6 @@ function App() {
       <section>
         <AuthProvider>
           <Routes>
-            {/* <PrivateRoute exact path="/" element={<Dashboard />} /> */}
-
             <Route exact path='/' element={
               <PrivateRoute>
                 <Dashboard />
