@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Login() {
@@ -8,22 +8,23 @@ export default function Login() {
     const { login, currentUser } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     async function handleSubmit(event) {
         event.preventDefault()
 
-
         setError('')
         setLoading(true)
-        // console.log('try once')
-        const res = await login(emailRef.current.value, passwordRef.current.value)
-        // console.log(res)
 
+        const res = await login(emailRef.current.value, passwordRef.current.value)
+        // Not a great way to handle error codes, but fine for now.
         if (res.error) {
             console.log(res)
             setError(res.message.message.substring(10).replace('auth/', '').replace(/-/g, ' '))
+        } else {
+            navigate('/')
         }
-        // console.log('try2')
+
         setLoading(false)
     }
 

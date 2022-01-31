@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
+
   async function signup(email, password) {
     try {
       const res = await auth.createUserWithEmailAndPassword(email, password)
@@ -37,26 +38,41 @@ export function AuthProvider({ children }) {
       }
     }
     catch (err) {
-      console.log('in the catch block')
       return {
         error: true,
         message: err
       }
     }
   }
+
+  function logout(){
+    return auth.signOut()
+  }
+
   useEffect(() => {
-    const unsubscripe = auth.onAuthStateChanged(user => {
+    // strange solution to "Can't perform a React state update on an unmounted component." react warning Part 1
+    ifUserChangedIG()
+    return () => {
+      setCurrentUser({}); // This worked for me
+    };
+  }, [])
+
+
+  // strange solution to "Can't perform a React state update on an unmounted component." react warning Part 2
+  function ifUserChangedIG() {
+    const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
       setLoading(false)
     })
 
-    return unsubscripe
-  }, [])
+    return unsubscribe
 
+  }
   const value = {
     currentUser,
     login,
-    signup
+    signup,
+    logout
   }
   return (
     <AuthContext.Provider value={value}>
