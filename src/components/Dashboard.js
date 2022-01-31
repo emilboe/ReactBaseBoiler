@@ -14,9 +14,9 @@ export default function Dashboard() {
     <>
       <h1>Dashboard</h1>
       <p>Email: {currentUser.email}</p>
-      <button onClick={handleLogout}>Log out</button>
+      <button className="red"onClick={handleLogout}>Log out</button>
       <br />
-      <Link to="/update-profile">Update Profile</Link>
+      <Link to="/update-profile"><button className="green">Update Profile</button></Link>
     </>
   )
 

@@ -41,15 +41,18 @@ export default function Login() {
                     <input type="password" ref={passwordRef} required />
                 </div>
                 <br />
-                <button disabled={loading} type="submit">Log in</button>
+                <button className="purp" disabled={loading} type="submit">Log in</button>
                 <div>{error ? error : ''}</div>
-                <div>{currentUser && currentUser.email}</div>
             </form>
             <div>
-                <Link to='/forgot-password'>Forgotten pasword?</Link>
+                <Link to='/forgot-password'><button className="purp"> Forgotten pasword?</button></Link>
             </div>
             <br />
-            <div>Don't have an account? <Link to="/signup">Sign up</Link></div>
+            <div>Don't have an account?<br />
+                <Link to="/signup"> <button className="purp">Sign up</button></Link></div>
+
+
+            <div>{currentUser && "you're already logged in as: " + currentUser.email}</div>
         </>
     )
 }

@@ -49,12 +49,15 @@ export default function Signup() {
                     <input type="password" ref={passwordConfirmRef} required />
                 </div>
                 <br />
-                <button disabled={loading} type="submit">Sign up</button>
+                <button className="purp" disabled={loading} type="submit">Sign up</button>
                 <div>{error ? error : ''}</div>
-                <div>{currentUser && currentUser.email}</div>
             </form>
             <br />
-            <div>Already have an account? <Link to="/login">Login</Link></div>
+            <div>Already have an account? <Link to="/login">
+                <br />
+                <button className="purp">Log in</button></Link></div>
+            <br />
+            <div>{currentUser && "you're already logged in as: " + currentUser.email}</div>
         </>
     )
 }

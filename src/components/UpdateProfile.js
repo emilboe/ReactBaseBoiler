@@ -6,11 +6,16 @@ export default function UpdateProfile() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
-    const { updateEmail, updatePassword, currentUser } = useAuth()
+    const { updateEmail, updatePassword, currentUser, logout } = useAuth()
     const [error, setError] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+
+    function handleLogout() {
+        logout()
+        navigate('/login')
+    }
 
     function handleSubmit(event) {
         event.preventDefault()
@@ -22,12 +27,18 @@ export default function UpdateProfile() {
         const promises = []
         setLoading(true)
         setError('')
+        setMessage("")
+
         if (emailRef.current.value !== currentUser.email) {
-            // console.log('value:', emailRef.current.value)
+            console.log('email value:', emailRef.current.value)
             promises.push(updateEmail(emailRef.current.value))
-        }
-        if (passwordRef.current.value) {
+        } else if (passwordRef.current.value) {
+            console.log('pw value:', passwordRef.current.value)
             promises.push(updatePassword(passwordRef.current.value))
+        } else {
+            setLoading(false)
+            setMessage("You haven't changed anything!")
+            return
         }
 
         Promise.all(promises).then((res) => {
@@ -84,12 +95,16 @@ export default function UpdateProfile() {
                     />
                 </div>
                 <br />
-                <button disabled={loading} type="submit">Update Information</button>
+                <button className="purp" disabled={loading} type="submit">Update Information</button>
                 <div>{error ? error : ''}</div>
                 <div>{message ? message : ''}</div>
             </form>
             <br />
-            <Link to="/login">Cancel</Link>
+
+            <button onClick={handleLogout} className="green">Log out</button>
+            <br />
+            <br />
+            <Link to="/"><button className="red">Cancel</button></Link>
         </>
     )
 }

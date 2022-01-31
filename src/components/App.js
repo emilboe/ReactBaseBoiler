@@ -7,32 +7,36 @@ import Lost from './Lost';
 import PrivateRoute from './PrivateRoute';
 import ForgotPW from './ForgotPW';
 import UpdateProfile from './UpdateProfile';
+import './tempstyles.css'
 
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <Routes>
-          {/* <PrivateRoute exact path="/" element={<Dashboard />} /> */}
+      <section>
+        <AuthProvider>
+          <Routes>
+            {/* <PrivateRoute exact path="/" element={<Dashboard />} /> */}
 
-          <Route exact path='/' element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          } />
-          <Route exact path='/update-profile' element={
-            <PrivateRoute>
-              <UpdateProfile />
-            </PrivateRoute>
-          } />
+            <Route exact path='/' element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            } />
+            <Route exact path='/update-profile' element={
+              <PrivateRoute>
+                <UpdateProfile />
+              </PrivateRoute>
+            } />
 
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPW />} />
-          <Route path="/*" element={<Lost />} />
-        </Routes>
-      </AuthProvider>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPW />} />
+            <Route path="/*" element={<Lost />} />
+          </Routes>
+        </AuthProvider>
+      </section>
     </Router>
+
   );
 }
 
